@@ -13,5 +13,6 @@ The physical components needed for this project include:
     6. Piezoelectric Buzzer
     7. 470OHM and 260OHM resistors
 
+![Circuit diagram to assist in building the project](https://github.com/mohammad-moosa-shakir/raspberry_pi_smart_doorbell/blob/main/Basic%20Pi%20Doorbell.png?raw=true)
 
     
