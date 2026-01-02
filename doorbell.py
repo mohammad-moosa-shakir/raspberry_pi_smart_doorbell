@@ -8,7 +8,7 @@ GMAIL_PASS = 'enter password'
 SMTP_SERVER = 'smtp.gmail.com'
 SMTP_PORT = 587
 
-def send_email(recipient, subject, text):
+def send_email(recipient, subject, text): # This function sends emails to the recepient
     smtpserver = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
     smtpserver.ehlo()
     smtpserver.starttls()
@@ -19,29 +19,29 @@ def send_email(recipient, subject, text):
     smtpserver.sendmail(GMAIL_USER, recipient, msg)
     smtpserver.close()
 
-button = Button(18)
-sensor = DistanceSensor(echo=25, trigger=17)
-buzzer = Buzzer(23)
+button = Button(18) # Ground pin 18
+sensor = DistanceSensor(echo=25, trigger=17) # Ground pin 25 and 17
+buzzer = Buzzer(23) # Ground pin 23
 
-def update_reading():
+def update_reading(): # This function updates the distance sensor output data
     cm = sensor.distance * 100
     return cm
 
 
-def buzz(pitch, duration):
+def buzz(pitch, duration): # This function activates the buzzer and utilizes PWM
     period = 1.0 / pitch
     delay = period / 2
     cycles = int(duration*pitch)
     buzzer.beep(on_time=period,off_time=period,n=int(cycles/2))
 
-face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml") # Machine learning-based classifier for real-time face detection
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0) # Activates video footage with default camera option
 
 while True:
-    value = update_reading()
+    value = update_reading() # Continuously updates sensor data
 
-    if value <= 20:
+    if value <= 20: 
         print(f"Motion detected: {value} cm")
         buzz(200, 2)
 
@@ -57,7 +57,7 @@ while True:
             else:
                 print("Motion detected, but no face found.")
 
-        cv2.imshow("Door Camera", frame)
+        cv2.imshow("Door Camera", frame) # Displays camera feed
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
